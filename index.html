@@ -1,0 +1,1139 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FishTrack</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="Icono.png" type="image/x-icon">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="background-opacity"></div>
+
+
+<div class="loginPantalla">
+
+<div class="loginCaja">
+
+<h2>FishTrack</h2>
+
+<button class="btnMostrarLogin">
+Iniciar sesión
+</button>
+
+<button class="btnMostrarRegistro">
+Registrarse
+</button>
+
+<div class="loginFormulario">
+
+<input
+class="correoLogin"
+placeholder="Correo">
+
+<input
+class="passLogin"
+type="password"
+placeholder="Contraseña">
+
+<button class="entrar">
+Entrar
+</button>
+
+</div>
+
+<div class="registroFormulario oculto">
+
+<input
+class="nombreRegistro"
+placeholder="Nombre">
+
+<input
+class="correoRegistro"
+placeholder="Correo">
+
+<input
+class="passRegistro"
+type="password"
+placeholder="Contraseña">
+
+<button class="registrar">
+Crear cuenta
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BIENVENIDA -->
+
+<div class="bienvenida oculto">
+
+<div class="textoBienvenida">
+
+<h1>
+Bienvenido a FishTrack
+</h1>
+
+<p>
+Toda la información para una pesca exitosa
+</p>
+
+</div>
+
+<img
+src="welcome.png"
+class="welcome"
+alt="FishTrack">
+
+</div>
+
+<!-- INICIO -->
+
+<div class="inicioInfo oculto">
+
+<div class="telefono">
+
+<div class="pantallaTelefono">
+
+<img
+src="IconoFish.png"
+class="logoTelefono"
+alt="FishTrack">
+
+<h2 class="fishtrackTitulo">
+FishTrack
+</h2>
+
+<p class="fishtrackDescripcion">
+Toda la información que necesitas para una pesca exitosa.
+</p>
+
+<div class="menuTelefono">
+
+<button class="tarjeta abrirMapa">
+
+<div class="iconoTarjeta">
+🗺️
+</div>
+
+<h3>Mapa</h3>
+
+</button>
+
+<button class="tarjeta wikipedia">
+
+<div class="iconoTarjeta">
+🐟
+</div>
+
+<h3>Wiki</h3>
+
+</button>
+
+<button class="tarjeta abrirClimaUsuario">
+
+<div class="iconoTarjeta">
+🌤️
+</div>
+
+<h3>Clima</h3>
+
+</button>
+
+<button class="tarjeta abrirPerfil">
+
+
+    
+
+<div class="iconoTarjeta">
+👤
+</div>
+
+<h3>Perfil</h3>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<button class="botonPremiumTelefono">
+⭐
+</button>
+
+
+<div class="premiumTelefono">
+
+<h3>
+⭐ FishTrack Premium
+</h3>
+
+<div class="premiumPrecio">
+$2.99 <span>/mes</span>
+</div>
+
+
+<p>✔ -Sin Anuncios</p>
+<p>✔ -Sin limite en favoritos/puntos de pesca</p>
+<p>✔ -Capas de profundidad</p>
+<p>✔ -Compartimiento de puntos</p>
+
+
+<button class="comprarPremium">
+Obtener Premium
+</button>
+
+</div>
+
+</div>
+
+<div class="climaMapaBtn abrirClimaMapa">
+⛅
+</div>
+
+<div class="mapa">
+
+<div class="centroMapa"></div>
+
+</div>
+
+<div class="infoMapa">
+
+🧭
+
+<div>
+
+<span class="lat">
+9.976° N
+</span>
+
+<br>
+
+<span class="lng">
+84.829° W
+</span>
+
+</div>
+
+</div>
+
+<button class="cerrarMapa">
+❌ Cerrar mapa
+</button>
+
+
+<!-- CLIMA DEL MAPA -->
+
+<div class="climaMapaPanel">
+
+<div class="climaMapaCaja">
+
+<button class="cerrarClimaMapa">
+❌
+</button>
+
+<h2>
+🗺️ Clima del punto
+</h2>
+
+<p>
+🌡️ Temperatura:
+<span class="tempMapa">-</span>
+</p>
+
+<p>
+💨 Viento:
+<span class="vientoMapa">-</span>
+</p>
+
+<p>
+🧭 Dirección:
+<span class="direccionMapa">-</span>
+</p>
+
+<p>
+🌊 Marea:
+<span class="mareaMapa">-</span>
+</p>
+
+</div>
+
+</div>
+
+<!-- CLIMA DEL USUARIO -->
+
+<div class="climaPanel">
+
+<div class="climaTelefonoCaja">
+
+<button class="cerrarClima">
+❌
+</button>
+
+<h2>
+🌤️ Clima en tu ubicación (pronto cambiara este botón)
+</h2>
+
+<p>
+📍 Ubicación:
+<br>
+<span class="ubicacionClima">
+Pulsa el botón para obtenerla
+</span>
+</p>
+
+<p>
+🌡️ Temperatura:
+<span class="temperatura">
+-
+</span>
+</p>
+
+<p>
+💨 Viento:
+<span class="viento">
+-
+</span>
+</p>
+
+<p>
+💧 Humedad:
+<span class="humedad">
+-
+</span>
+</p>
+
+<p>
+🌧️ Lluvia:
+<span class="lluvia">
+-
+</span>
+</p>
+
+<div class="estadoPesca pescaRegular">
+Esperando datos...
+</div>
+
+<button class="obtenerClima">
+📍 Obtener clima
+</button>
+
+</div>
+
+</div>
+
+
+<!-- WIKI -->
+
+<div class="wikiPanel">
+
+<div class="wikiCaja">
+
+<button class="cerrarWiki">
+❌
+</button>
+
+<h2 class="tituloWiki">
+
+<img
+src="IconoWiki.png"
+alt="Wiki FishTrack">
+
+FishTrack Wiki
+
+</h2>
+
+<div class="busquedaPeces">
+
+<input
+type="text"
+id="buscarPez"
+placeholder="🔎 Buscar pez...">
+
+<select id="filtroPez">
+
+<option value="todos">
+Todos los peces
+</option>
+
+<option value="marea-alta">
+🌊 Marea alta
+</option>
+
+<option value="marea-baja">
+🌊 Marea baja
+</option>
+
+<option value="costero">
+🎣 Pesca costera
+</option>
+
+</select>
+
+</div>
+
+<div class="pecesLista">
+
+
+<div class="pezCard" data-tipo="marea-alta costero">
+
+
+<img
+src="imagenes/PezVela.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Pez vela
+</h3>
+
+
+<a
+href="detalles.html?pez=pezvela"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta costero">
+
+
+<img
+src="imagenes/Dorado.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Dorado
+</h3>
+
+
+<a
+href="detalles.html?pez=dorado"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta">
+
+
+<img
+src="imagenes/Atun.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Atún
+</h3>
+
+
+<a
+href="detalles.html?pez=atun"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta">
+
+
+<img
+src="imagenes/Marlin.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Marlin azul
+</h3>
+
+
+<a
+href="detalles.html?pez=marlin"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/Robalo.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Róbalo
+</h3>
+
+
+<a
+href="detalles.html?pez=robalo"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/Pargo.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Pargo rojo
+</h3>
+
+
+<a
+href="detalles.html?pez=pargo"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/PezGallo.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Pez gallo
+</h3>
+
+
+<a
+href="detalles.html?pez=pezgallo"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta costero">
+
+
+<img
+src="imagenes/Peto.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Peto
+</h3>
+
+
+<a
+href="detalles.html?pez=peto"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta">
+
+
+<img
+src="imagenes/Sabalo.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Sabalo
+</h3>
+
+
+<a
+href="detalles.html?pez=sabalo"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/Corvina.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Corvina
+</h3>
+
+
+<a
+href="detalles.html?pez=corvina"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/Sierra.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Sierra
+</h3>
+
+
+<a
+href="detalles.html?pez=sierra"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta">
+
+
+<img
+src="imagenes/PezEspada.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Pez espada
+</h3>
+
+
+<a
+href="detalles.html?pez=pezespada"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta costero">
+
+
+<img
+src="imagenes/Mero.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Mero
+</h3>
+
+
+<a
+href="detalles.html?pez=mero"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/PargoNegro.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Pargo negro
+</h3>
+
+
+<a
+href="detalles.html?pez=pargonegro"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta">
+
+
+<img
+src="imagenes/Barracuda.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Barracuda
+</h3>
+
+
+<a
+href="detalles.html?pez=barracuda"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/Lisa.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Lisa
+</h3>
+
+
+<a
+href="detalles.html?pez=lisa"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta costero">
+
+
+<img
+src="imagenes/Jack.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Jurel
+</h3>
+
+
+<a
+href="detalles.html?pez=jurel"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja">
+
+
+<img
+src="imagenes/PezLeon.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Pez león
+</h3>
+
+
+<a
+href="detalles.html?pez=pezleon"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta">
+
+
+<img
+src="imagenes/TiburonMartillo.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Tiburón martillo
+</h3>
+
+
+<a
+href="detalles.html?pez=tiburonmartillo"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/Bagre.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Bagre
+</h3>
+
+
+<a
+href="detalles.html?pez=bagre"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta costero">
+
+
+<img
+src="imagenes/Palometa.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Palometa
+</h3>
+
+
+<a
+href="detalles.html?pez=palometa"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/PezGato.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Pez gato de agua
+</h3>
+
+
+<a
+href="detalles.html?pez=pezgato"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-alta">
+
+
+<img
+src="imagenes/Cabrilla.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Cabrilla
+</h3>
+
+
+<a
+href="detalles.html?pez=cabrilla"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+<div class="pezCard" data-tipo="marea-baja costero">
+
+
+<img
+src="imagenes/Ronco.png"
+class="pezImagen">
+
+
+<h3 class="peznombre">
+Ronco
+</h3>
+
+
+<a
+href="detalles.html?pez=ronco"
+class="LinkDetalles">
+Más detalles
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PANEL SOCIAL -->
+
+<div class="socialPanel oculto">
+
+<div class="socialCaja">
+
+<button class="cerrarSocial">
+❌
+</button>
+
+<div class="socialMenu">
+
+<button class="tabPerfil">
+👤 Perfil
+</button>
+
+<button class="tabAmigos">
+👥 Amigos
+</button>
+
+<button class="tabChat">
+💬 Chat
+</button>
+
+<button class="tabComunidad">
+🌎Comunidad
+</button>
+
+</div>
+
+<!-- PERFIL -->
+
+<div id="zonaPerfil">
+
+<h2 class="tituloPerfil">
+    👤 Perfil
+
+    <button
+        id="botonConfiguracion"
+        class="botonConfiguracion"
+        title="Configuración"
+    >
+        ⚙️
+    </button>
+</h2>
+
+
+
+
+<img
+id="fotoPerfil"
+src="default.png"
+alt="Perfil">
+
+<h3 id="nombrePerfil">
+Usuario
+</h3>
+
+<input
+id="nuevoNombre"
+placeholder="Nuevo nombre">
+
+<button id="guardarNombre">
+Guardar nombre
+</button>
+
+<label class="botonFoto">
+
+📷 Cambiar foto
+
+<input
+type="file"
+id="cambiarFoto"
+hidden>
+
+</label>
+
+<button id="cerrarSesion">
+Cerrar sesión
+</button>
+
+</div>
+
+<!-- AMIGOS -->
+
+    <div id="zonaAmigos" style="display:none;">
+
+<h2>👥 Amigos</h2>
+
+<input
+id="buscarAmigo"
+placeholder="Buscar usuario">
+
+<button id="buscarUsuario">
+🔎
+</button>
+
+<div id="resultadoBusqueda"></div>
+
+<h3>Solicitudes de amistad</h3>
+
+<div id="listaSolicitudes"></div>
+
+<h3>Mis amigos</h3>
+
+<div id="listaAmigos"></div>
+
+</div>
+<!-- CHAT -->
+
+<div id="zonaChat" style="display:none;">
+
+<h2>
+💬 Chat
+</h2>
+
+<h3 id="nombreChat">
+Selecciona un amigo
+</h3>
+
+<div id="listaChatAmigos"></div>
+
+<div id="mensajesPrivados"></div>
+
+<input
+id="mensajePrivado"
+placeholder="Escribe un mensaje">
+
+<button id="enviarMensaje">
+Enviar
+</button>
+
+</div>
+
+<div id="zonaComunidad" style="display:none;">
+
+<h2>
+🌎 Comunidad
+</h2>
+
+<div id="listaComunidad"></div>
+
+<div class="accionesPublicacion">
+
+<label
+for="fotoComunidad"
+class="botonFotoComunidad"
+>
+📷 
+</label>
+
+<input
+type="file"
+id="fotoComunidad"
+accept="image/*"
+hidden
+>
+
+<input
+id="mensajeComunidad"
+placeholder="Comparte algo..."
+>
+
+<button id="publicarComunidad">
+Publicar
+</button>
+
+</div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script type="module" src="social.js"></script>
+
+<script src="script.js"></script>
+
+
+
+</body>
+</html>
