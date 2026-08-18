@@ -4164,3 +4164,295 @@ abrirPerfilAutomaticamente();
     });
 
 })();
+
+
+// solucion supongo
+
+
+    (function(){
+
+    function iniciarActualizacionFotoTiempoReal(){
+
+        if(!usuarioActual){
+
+            setTimeout(
+                iniciarActualizacionFotoTiempoReal,
+                300
+            );
+
+            return;
+        }
+
+        const usuarioRef =
+            ref(
+                db,
+                "usuarios/" + usuarioActual
+            );
+
+
+        onValue(
+            usuarioRef,
+            async(snapshot)=>{
+
+                if(!snapshot.exists()){
+                    return;
+                }
+
+
+                const datos =
+                    snapshot.val();
+
+
+                const nuevaFoto =
+                    datos.foto || "default.png";
+
+
+                datosUsuarioActual =
+                    datos;
+
+
+                if(fotoPerfil){
+
+                    if(fotoPerfil.src !== nuevaFoto){
+
+                        fotoPerfil.src =
+                            nuevaFoto;
+
+                    }
+
+                }
+
+
+                if(nombrePerfil){
+
+                    nombrePerfil.textContent =
+                        datos.nombre || "Usuario";
+
+                }
+
+
+                actualizarFotoAmigos(
+                    nuevaFoto
+                );
+
+                actualizarFotoSolicitudes(
+                    nuevaFoto
+                );
+
+                actualizarFotoPublicaciones(
+                    nuevaFoto
+                );
+
+            }
+        );
+
+    }
+
+
+    async function actualizarFotoAmigos(nuevaFoto){
+
+        if(!usuarioActual){
+            return;
+        }
+
+
+        try{
+
+            const amigos =
+                await get(
+                    ref(
+                        db,
+                        "amigos/" + usuarioActual
+                    )
+                );
+
+
+            if(!amigos.exists()){
+                return;
+            }
+
+
+            const cambios = {};
+
+
+            amigos.forEach(amigo=>{
+
+                const uid =
+                    amigo.key;
+
+
+                cambios[
+                    "amigos/" +
+                    uid +
+                    "/" +
+                    usuarioActual +
+                    "/foto"
+                ] = nuevaFoto;
+
+            });
+
+
+            if(
+                Object.keys(cambios).length > 0
+            ){
+
+                await update(
+                    ref(db),
+                    cambios
+                );
+
+            }
+
+        }catch(error){
+
+            console.error(
+                "Error actualizando foto en amigos:",
+                error
+            );
+
+        }
+
+    }
+
+
+    async function actualizarFotoSolicitudes(nuevaFoto){
+
+        if(!usuarioActual){
+            return;
+        }
+
+
+        try{
+
+            const solicitudes =
+                await get(
+                    ref(db,"solicitudes")
+                );
+
+
+            if(!solicitudes.exists()){
+                return;
+            }
+
+
+            const cambios = {};
+
+
+            solicitudes.forEach(usuario=>{
+
+                const datos =
+                    usuario.val();
+
+
+                if(
+                    datos &&
+                    datos[usuarioActual]
+                ){
+
+                    cambios[
+                        "solicitudes/" +
+                        usuario.key +
+                        "/" +
+                        usuarioActual +
+                        "/foto"
+                    ] = nuevaFoto;
+
+                }
+
+            });
+
+
+            if(
+                Object.keys(cambios).length > 0
+            ){
+
+                await update(
+                    ref(db),
+                    cambios
+                );
+
+            }
+
+        }catch(error){
+
+            console.error(
+                "Error actualizando foto en solicitudes:",
+                error
+            );
+
+        }
+
+    }
+
+
+    async function actualizarFotoPublicaciones(nuevaFoto){
+
+        if(!usuarioActual){
+            return;
+        }
+
+
+        try{
+
+            const publicaciones =
+                await get(
+                    ref(db,"comunidad")
+                );
+
+
+            if(!publicaciones.exists()){
+                return;
+            }
+
+
+            const cambios = {};
+
+
+            publicaciones.forEach(publicacion=>{
+
+                const datos =
+                    publicacion.val();
+
+
+                if(
+                    datos &&
+                    datos.uid === usuarioActual
+                ){
+
+                    cambios[
+                        "comunidad/" +
+                        publicacion.key +
+                        "/foto"
+                    ] = nuevaFoto;
+
+                }
+
+            });
+
+
+            if(
+                Object.keys(cambios).length > 0
+            ){
+
+                await update(
+                    ref(db),
+                    cambios
+                );
+
+            }
+
+        }catch(error){
+
+            console.error(
+                "Error actualizando foto en publicaciones:",
+                error
+            );
+
+        }
+
+    }
+
+
+    iniciarActualizacionFotoTiempoReal();
+
+})();
