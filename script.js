@@ -934,3 +934,25 @@ document.addEventListener("visibilitychange",()=>{
 });
 
 
+(function(){
+
+    const bienvenida = document.querySelector(".bienvenida");
+
+    if(!bienvenida) return;
+
+    const esMovil = window.innerWidth <= 768;
+
+    if(esMovil) return;
+
+    const vinoDeOtraPagina =
+        document.referrer &&
+        new URL(document.referrer).origin === window.location.origin;
+
+    if(vinoDeOtraPagina){
+        bienvenida.style.display = "none";
+    }else{
+        sessionStorage.removeItem("bienvenidaMostrada");
+        bienvenida.style.display = "";
+    }
+
+})();
