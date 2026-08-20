@@ -4464,29 +4464,50 @@ abrirPerfilAutomaticamente();
 
     if(!login) return;
 
-    login.style.visibility = "hidden";
+    login.style.display = "none";
 
-    const observer = new MutationObserver(() => {
+    const mostrarLogin = () => {
+        login.style.display = "";
+        login.classList.remove("oculto");
+    };
 
-        if(login.classList.contains("oculto")){
-            login.style.visibility = "hidden";
-        }else{
-            login.style.visibility = "visible";
+    const ocultarLogin = () => {
+        login.style.display = "none";
+    };
+
+    ocultarLogin();
+
+    const original = window.onAuthStateChanged;
+
+    const esperarFirebase = setInterval(() => {
+
+        if(typeof usuarioActual !== "undefined"){
+
+            clearInterval(esperarFirebase);
+
+            if(usuarioActual){
+                ocultarLogin();
+            }else{
+                mostrarLogin();
+            }
+
         }
 
-    });
-
-    observer.observe(login, {
-        attributes:true,
-        attributeFilter:["class"]
-    });
+    }, 50);
 
     setTimeout(() => {
+        clearInterval(esperarFirebase);
 
-        if(!login.classList.contains("oculto")){
-            login.style.visibility = "visible";
+        if(typeof usuarioActual !== "undefined"){
+
+            if(usuarioActual){
+                ocultarLogin();
+            }else{
+                mostrarLogin();
+            }
+
         }
 
-    }, 1000);
+    }, 10000);
 
 })();
