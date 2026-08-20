@@ -4456,3 +4456,37 @@ abrirPerfilAutomaticamente();
     iniciarActualizacionFotoTiempoReal();
 
 })();
+
+
+(function(){
+
+    const login = document.querySelector(".loginPantalla");
+
+    if(!login) return;
+
+    login.style.visibility = "hidden";
+
+    const observer = new MutationObserver(() => {
+
+        if(login.classList.contains("oculto")){
+            login.style.visibility = "hidden";
+        }else{
+            login.style.visibility = "visible";
+        }
+
+    });
+
+    observer.observe(login, {
+        attributes:true,
+        attributeFilter:["class"]
+    });
+
+    setTimeout(() => {
+
+        if(!login.classList.contains("oculto")){
+            login.style.visibility = "visible";
+        }
+
+    }, 1000);
+
+})();
