@@ -4511,3 +4511,102 @@ abrirPerfilAutomaticamente();
     }, 10000);
 
 })();
+
+
+
+(function(){
+
+    const login = document.querySelector(".loginPantalla");
+    const bienvenida = document.querySelector(".bienvenida");
+    const inicio = document.querySelector(".inicioInfo");
+
+    if(!login) return;
+
+    const pantalla = document.createElement("div");
+
+    pantalla.id = "pantallaCargando";
+
+    pantalla.innerHTML = `
+        <div class="cargandoContenido">
+
+            <img src="Icono.png" alt="FishTrack">
+
+            <h1>FishTrack</h1>
+
+            <p>Cargando...</p>
+
+            <div class="cargandoSpinner"></div>
+
+        </div>
+    `;
+
+    document.body.appendChild(pantalla);
+
+
+    login.classList.add("oculto");
+
+    bienvenida?.classList.add("oculto");
+    inicio?.classList.add("oculto");
+
+
+    let terminado = false;
+
+
+    const esperarFirebase = setInterval(()=>{
+
+        if(terminado) return;
+
+
+        if(usuarioActual){
+
+            terminado = true;
+
+            clearInterval(esperarFirebase);
+
+            login.classList.add("oculto");
+
+            bienvenida?.classList.remove("oculto");
+            inicio?.classList.remove("oculto");
+
+            quitarCarga();
+
+            return;
+
+        }
+
+
+        if(
+            login &&
+            !login.classList.contains("oculto")
+        ){
+
+            terminado = true;
+
+            clearInterval(esperarFirebase);
+
+            login.classList.remove("oculto");
+
+            bienvenida?.classList.add("oculto");
+            inicio?.classList.add("oculto");
+
+            quitarCarga();
+
+        }
+
+    },100);
+
+
+    function quitarCarga(){
+
+        pantalla.classList.add("cargandoSalida");
+
+        setTimeout(()=>{
+
+            pantalla.remove();
+
+        },500);
+
+    }
+
+
+})();
