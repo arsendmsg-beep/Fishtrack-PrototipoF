@@ -6,7 +6,7 @@ let direccion=tipo==="lat"
 return `${Math.abs(valor).toFixed(3)}° ${direccion}`;
 }
 
-const TIDE_API_KEY="76a2f21d-82be-42d7-8022-b1f2039084f9";
+const TIDE_API_KEY="de8078fe-98c8-48e0-9f6e-e02eaaf8d058";
 
 const botonMapa=document.querySelector(".abrirMapa");
 const cerrarMapa=document.querySelector(".cerrarMapa");
